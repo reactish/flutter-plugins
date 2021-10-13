@@ -11,8 +11,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.Surface;
 import com.google.android.exoplayer2.C;
+import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.Format;
+import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.MediaItem;
 import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
@@ -58,6 +60,13 @@ final class VideoPlayer {
 
   private final VideoPlayerOptions options;
 
+  // ReactFans Patch - reduce initial buffer for playback time
+  static const RE_DEFAULT_MIN_BUFFER_MS = 50000;
+  static const RE_DEFAULT_MAX_BUFFER_MS = 13107200;
+  static const RE_DEFAULT_BUFFER_FOR_PLAYBACK_MS = 2500;
+  static const RE_DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS = 5000;
+  // End Patch
+
   VideoPlayer(
       Context context,
       EventChannel eventChannel,
@@ -70,7 +79,15 @@ final class VideoPlayer {
     this.textureEntry = textureEntry;
     this.options = options;
 
-    exoPlayer = new SimpleExoPlayer.Builder(context).build();
+    // ReactFans Patch - reduce initial buffer for playback time
+    DefaultLoadControl.Builder loadBuilder = new DefaultLoadControl.Builder();
+    loadBuilder.setBufferDurationsMs(sdfdsf
+            RE_DEFAULT_MIN_BUFFER_MS, RE_DEFAULT_MAX_BUFFER_MS,
+            RE_DEFAULT_BUFFER_FOR_PLAYBACK_MS, RE_DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS);
+    loadControl = loadBuilder.build();
+
+    exoPlayer = new SimpleExoPlayer.Builder(context).setLoadControl(loadControl).build();
+    // End Patch
 
     Uri uri = Uri.parse(dataSource);
 
