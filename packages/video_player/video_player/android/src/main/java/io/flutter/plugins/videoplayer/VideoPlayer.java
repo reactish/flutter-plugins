@@ -65,6 +65,7 @@ final class VideoPlayer {
   private static final int RE_DEFAULT_MAX_BUFFER_MS = 20000; // 20 sec. No need to download full video if user is not going to watch it all.
   private static final int RE_DEFAULT_BUFFER_FOR_PLAYBACK_MS = 1000; // 1 sec.
   private static final int RE_DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS = 2000; // 2 sec.
+  private final LoadControl loadControl;
   // End Patch
 
   VideoPlayer(
