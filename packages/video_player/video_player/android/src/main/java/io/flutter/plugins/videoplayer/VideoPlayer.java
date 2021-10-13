@@ -61,10 +61,10 @@ final class VideoPlayer {
   private final VideoPlayerOptions options;
 
   // ReactFans Patch - reduce initial buffer for playback time
-  static const int RE_DEFAULT_MIN_BUFFER_MS = 5000; // 5 sec.
-  static const int RE_DEFAULT_MAX_BUFFER_MS = 20000; // 20 sec. No need to download full video if user is not going to watch it all.
-  static const int RE_DEFAULT_BUFFER_FOR_PLAYBACK_MS = 1000; // 1 sec.
-  static const int RE_DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS = 2000; // 2 sec.
+  private static final int RE_DEFAULT_MIN_BUFFER_MS = 5000; // 5 sec.
+  private static final int RE_DEFAULT_MAX_BUFFER_MS = 20000; // 20 sec. No need to download full video if user is not going to watch it all.
+  private static final int RE_DEFAULT_BUFFER_FOR_PLAYBACK_MS = 1000; // 1 sec.
+  private static final int RE_DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS = 2000; // 2 sec.
   // End Patch
 
   VideoPlayer(
